@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeCode Health - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Miamiao Health</div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login/Register</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="appointments.html">Appointments</a></li>
+            <li><a href="reminders.html">Reminder Settings</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="support.html">Support/Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="privacy.html">Privacy & Terms</a></li>
+        </ul>
+    </nav>
+    <section class="hero">
+        <h1>Never Miss an Appointment Again!</h1>
+        <p>
+            Miamiao Health connects doctors and patients, sending timely appointment reminders via SMS or WhatsApp.<br>
+            Manage your health with ease and stay informed, always.
+            Health is wealth, and we are here to help you manage it better!<br>
+            <b>Book your appointment today!</b>
+        </p>
+    </section>
+    <section class="features">
+        <div class="feature-card">
+            <h3>Can't reach in time?</h3>
+            <p>Easy, Schedule an appointment on the go!<br><br> Patients can book appointments online and receive instant confirmations.</p>
+        </div>
+        <div class="feature-card">
+            <h3>Reminde me?</h3>
+            <p>No problem!<br>Get notified of upcoming appointments via<b> SMS</b> or<b> WhatsApp</b>, <br>your pick, your choice!😎</p>
+        </div>
+        <div class="feature-card">
+            <h3>Doctor & Patient Dashboards</h3>
+            <i>Doctors manage appointments and patients, while patients track their visits and preferences.
+                You dont need to worry any more about missing appointments, or late visits,<br>
+                it's just one <b>book</b> away.
+            <br>😉😂😃</p>
+            </p>
+        </div>
+        <div class="feature-card">
+            <h3>Secure & Private</h3>
+            <p>Your data is protected. Manage your profile, preferences, and privacy settings anytime any where.</p>
+        </div>
+    </section>
+</body>
+<footer class="footer">
+    <p>&copy; 2023 Miamiao Health. All rights reserved.</p>
+    
+</html>
+<!-- Navigation Toolbar Script -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const navbar = document.querySelector('.navbar ul');
+    const navLinks = navbar.querySelectorAll('a');
+    // Hide all nav links except the active one (About) and show a menu button
+    navbar.style.display = 'none';
+
+    // Create menu button
+    const menuBtn = document.createElement('button');
+    menuBtn.textContent = '☰ Menu';
+    menuBtn.style.background = '#00b894';
+    menuBtn.style.color = '#fff';
+    menuBtn.style.border = 'none';
+    menuBtn.style.padding = '0.5rem 1rem';
+    menuBtn.style.fontSize = '1rem';
+    menuBtn.style.borderRadius = '4px';
+    menuBtn.style.cursor = 'pointer';
+    menuBtn.setAttribute('aria-label', 'Open navigation menu');
+
+    // Insert menu button into navbar
+    document.querySelector('.navbar').appendChild(menuBtn);
+
+    // Toggle nav links on menu button click
+    menuBtn.addEventListener('click', function() {
+        if (navbar.style.display === 'none') {
+            navbar.style.display = 'flex';
+            navbar.style.flexDirection = 'column';
+            navbar.style.position = 'absolute';
+            navbar.style.top = '60px';
+            navbar.style.right = '2rem';
+            navbar.style.background = '#2d3e50';
+            navbar.style.padding = '1rem';
+            navbar.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+            navbar.style.zIndex = '1000';
+        } else {
+            navbar.style.display = 'none';
+        }
+    });
+
+    // Hide menu when a link is clicked (for single-page feel)
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navbar.style.display = 'none';
+        });
+    });
+
+    // Responsive: Show nav links if window is wide
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 800) {
+            navbar.style.display = 'flex';
+            navbar.style.flexDirection = 'row';
+            navbar.style.position = '';
+            navbar.style.background = '';
+            navbar.style.padding = '';
+            navbar.style.boxShadow = '';
+        } else {
+            navbar.style.display = 'none';
+        }
+    });
+});
+</script>

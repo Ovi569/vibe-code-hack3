@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>login/register</title>
+</head>
+<body>
+    <!--Form box-->
+    <div class="form-box">
+<!--Login form-->
+<div class="login-container" id="login" style="display: block;">
+    <form>
+        <div class="top">
+            <span>Not signed in? <a href="#" onclick="showRegister()">Sign Up</a></span>
+            <header>Log in</header>
+        </div>
+        <div class="input-box">
+            <input type="email" class="input-field" placeholder="User name or Email" required>
+        </div>
+        <div class="input-box">
+            <input type="password" class="input-field" placeholder="Password" required>
+        </div>
+        <div class="input-box">
+            <input type="submit" class="submit" value="Sign In">
+        </div>
+        <div class="two-col">
+            <div class="one">
+                <input type="checkbox" id="login-remember">
+                <label for="login-remember">Remember Me</label>
+            </div>
+            <div class="two">
+                <a href="#">Forgot password?</a>
+            </div>
+        </div>
+    </form>
+</div>
+<!--registration form-->
+<div class="register-container" id="register" style="display: none;">
+    <form>
+        <div class="top">
+            <span>Already have an account? <a href="#" onclick="showLogin()">Log in</a></span>
+            <header>Sign Up</header>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" placeholder="First Name" required>
+        </div>
+        <div class="input-box">
+            <input type="text" class="input-field" placeholder="Last Name" required>
+        </div>
+        <div class="input-box">
+            <input type="email" class="input-field" placeholder="Email" required>
+        </div>
+        <div class="input-box">
+            <input type="password" class="input-field" placeholder="Password" required>
+        </div>
+        <div class="input-box">
+            <input type="submit" class="submit" value="Register">
+        </div>
+        <div class="two-col">
+            <div class="one">
+                <input type="checkbox" id="register-remember">
+                <label for="register-remember">Remember Me</label>
+            </div>
+            <div class="two">
+                <input type="checkbox" id="register-terms" required>
+                <label for="register-terms">Terms & conditions apply</label>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+function showRegister() {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('register').style.display = 'block';
+}
+function showLogin() {
+    document.getElementById('register').style.display = 'none';
+    document.getElementById('login').style.display = 'block';
+}
+</script>
+<script src="index.js"></script>
+
+</body>
+</html>
