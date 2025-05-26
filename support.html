@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Support & Contact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #5b75e7; }
+        .container { max-width: 700px; margin: 40px auto; background: #dda8a8; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);}
+        h1, h2 { color: #2c3e50; }
+        .faq { margin-bottom: 30px; }
+        .faq-item { margin-bottom: 15px; }
+        .faq-question { font-weight: bold; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 10px; }
+        input, textarea { padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 15px; padding: 10px; background: #3498db; color: #fff; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #2980b9; }
+        .contact-info { margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Support & Contact</h1>
+        <div class="contact-info">
+            <h2>Contact Us</h2>
+            <p>Email: <a href="mailto:support@miaomiao.com">support@miaomiao.com</a></p>
+            <p>Phone: +254706360371<br></p>
+            <p>+234 904 938 5722</p>
+        </div>
+
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <div class="faq-question">How do I receive notifications for my appointments?</div>
+                <div class="faq-answer">Both doctors and patients will receive notifications via email and in-app alerts before their scheduled appointments.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Can I reschedule or cancel my appointment?</div>
+                <div class="faq-answer">Yes, you can manage your appointments from your dashboard. Notifications will update accordingly.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Who do I contact for technical issues?</div>
+                <div class="faq-answer">Please use the contact form below or email our support team directly.</div>
+            </div>
+        </div>
+
+        <h2>Contact Form</h2>
+        <form id="contactForm">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+        <div id="formMessage" style="margin-top:15px;color:green;display:none;">
+            Thank you for contacting us! We will get back to you soon.
+        </div>
+    </div>
+    <script>
+        // Simple form handler (demo only)
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('formMessage').style.display = 'block';
+            this.reset();
+        });
+    </script>
+</body>
+</html></div></form></div></html>

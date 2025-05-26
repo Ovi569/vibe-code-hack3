@@ -98,7 +98,7 @@
 }
 
 header{
-    color:#a753ec;
+    color:#3447b4;
     font-size: 30px;
     text-align: center;
     padding: 10px 0 30px 0;
@@ -112,8 +112,8 @@ header{
 
 .input-field{
     font-size: 15px;
-    background:#acb6c4;
-    color: #fff;
+    background:#aecaf1;
+    color: #252424;
     height: 50px;
     width:100%;
     padding: 0 10px 0 45px;
@@ -124,10 +124,10 @@ header{
 }
 
 .input-field:hover, .input-field:focus{
-    background:rgba(225, 225, 225, 0.25);
+    background:rgba(119, 152, 224, 0.25);
 }
 ::-webkit-input-placeholder{
-    color:#fff;
+    color:#330606;
 }
 .submit{
     font-size: 15px;
@@ -138,18 +138,18 @@ header{
     border: none;
     border-radius: 30px;
     outline: none;
-    background:rgba(225, 225, 225, 0.7);
+    background:rgba(111, 113, 228, 0.7);
     cursor: pointer;
     transition: .3s ease-in-out;
 }
 .submit:hover{
-    background: rgba(225, 225, 225, 0.9);
+    background: rgba(189, 72, 72, 0.9);
     box-shadow: 1px 5px 7px 1px rgba(0, 0, 0, 0.2);
 }
 .two-col{
     display: flex;
     justify-content: space-between;
-    color: #fff;
+    color: #1b1111;
     font-size: small;
     margin-top: 10px;
 }
@@ -163,4 +163,23 @@ header{
 }
 .two label a:hover{
     text-decoration: underline;
+}
+.form-box {
+    border-radius: 30px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    background: #fff;
+}
+@media (max-width: 600px) {
+    .form-box {
+        width: 95vw;
+        left: 0;
+        top: 10px;
+    }
+}
+
+.form-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

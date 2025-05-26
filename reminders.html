@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Appointment Reminders</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #a0b6f3; }
+        .reminder-container { max-width: 500px; margin: auto; background: #eea2a2; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px #ccc; }
+        h2 { color: #f06168; }
+        label { display: block; margin-top: 15px; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { margin-top: 20px; padding: 10px 20px; background: #7491c7; color: #302f2f; border: none; border-radius: 4px; cursor: pointer; }
+        .message { margin-top: 20px; padding: 10px; background: #e6f7ff; border-left: 4px solid #2d6cdf; }
+    </style>
+</head>
+<body>
+    <div class="reminder-container">
+        <h2>Appointment Reminder</h2>
+        <form id="reminderForm">
+            <label for="recipient">Send reminder to:</label>
+            <select id="recipient" required>
+                <option value="">Select</option>
+                <option value="Patient">Patient</option>
+                <option value="Doctor">Doctor</option>
+            </select>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" required placeholder="Enter name">
+
+            <label for="appointmentDate">Appointment Date & Time:</label>
+            <input type="datetime-local" id="appointmentDate" required>
+
+            <button type="submit">Send Reminder</button>
+        </form>
+        <div id="reminderMessage" class="message" style="display:none;"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('reminderForm');
+
+        // Add message type selection to the form
+        const typeLabel = document.createElement('label');
+        typeLabel.setAttribute('for', 'messageType');
+        typeLabel.textContent = 'Send via:';
+        const typeSelect = document.createElement('select');
+        typeSelect.id = 'messageType';
+        typeSelect.required = true;
+        typeSelect.innerHTML = `
+            <option value="">Select</option>
+            <option value="SMS">SMS</option>
+            <option value="WhatsApp">WhatsApp</option>
+        `;
+        form.insertBefore(typeLabel, form.querySelector('button'));
+        form.insertBefore(typeSelect, form.querySelector('button'));
+        document.getElementById('reminderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const recipient = document.getElementById('recipient').value;
+            const name = document.getElementById('name').value;
+            const appointmentDate = document.getElementById('appointmentDate').value;
+
+            if (!recipient || !name || !appointmentDate) return;
+
+            const dateObj = new Date(appointmentDate);
+            const dateStr = dateObj.toLocaleString();
+
+            let message = '';
+            if (recipient === 'Patient') {
+                message = `Dear ${name}, this is a reminder for your upcoming appointment on ${dateStr}. Please arrive 10 minutes early.`;
+            } else {
+                message = `Dear Dr. ${name}, you have an upcoming appointment scheduled on ${dateStr}.`;
+            }
+
+            const msgDiv = document.getElementById('reminderMessage');
+            msgDiv.textContent = message;
+            msgDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

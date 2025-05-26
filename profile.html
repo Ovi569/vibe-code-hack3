@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Page - Edit Info & Notifications</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: Arial, sans-serif; background: #a1adf3; margin: 0; padding: 0; }
+        .container { max-width: 500px; margin: 40px auto; background: #d69696; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);}
+        h2 { text-align: center; color: #141414; }
+        label { display: block; margin-top: 15px; color: #1b1b1b; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+        .section-title { margin-top: 30px; font-weight: bold; color: #222; }
+        .checkbox-group { margin-top: 10px; }
+        .checkbox-group label { display: inline-block; margin-right: 20px; }
+        button { margin-top: 25px; width: 100%; padding: 10px; background: #27435a; color: #fff; border: none; border-radius: 4px; font-size: 16px; cursor: pointer;}
+        button:hover { background: #6e8494; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>User Profile</h2>
+        <form id="profileForm">
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
+            </select>
+
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone">
+
+            <div class="section-title">Notification Preferences</div>
+            <div class="checkbox-group">
+                <label>
+                    <input type="checkbox" name="notify_email" checked>
+                    Email Notifications
+                </label>
+                <label>
+                    <input type="checkbox" name="notify_sms">
+                    SMS Notifications
+                </label>
+                <label>
+                    <input type="checkbox" name="notify_push">
+                    Push Notifications
+                </label>
+            </div>
+
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Profile updated successfully!');
+            // Here, you would typically send the form data to your backend using fetch or AJAX.
+        });
+    </script>
+</body>
+</html>

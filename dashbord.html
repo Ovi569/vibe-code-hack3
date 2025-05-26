@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: linear-gradient(to right, lightblue, rgb(104, 217, 245)); margin: 0; }
+        .container { max-width: 900px; margin: 40px auto; background: #f0c2c2; border-radius: 8px; box-shadow: 0 2px 8px #dfb9b9; padding: 32px; }
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; }
+        .dashboard-header h2 { margin: 0; }
+        .nav { margin-bottom: 24px; }
+        .nav button { margin-right: 12px; padding: 8px 20px; border: none; border-radius: 4px; background: #89accf; color: #161616; cursor: pointer; }
+        .nav button.active { background: #7bb0ee; }
+        .section { display: none; }
+        .section.active { display: block; }
+        table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+        th, td { padding: 10px; border-bottom: 1px solid #ecadad; text-align: left; }
+        .reminder, .preferences { margin-top: 20px; }
+        .reminder input, .preferences input { margin-right: 8px; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="dashboard-header">
+        <h2 id="dashboardTitle">Dashboard</h2>
+        <span id="userTypeLabel"></span>
+    </div>
+    <div class="nav" id="dashboardNav"></div>
+    <div id="doctorSection" class="section">
+        <h3>Upcoming Appointments</h3>
+        <table id="doctorAppointments">
+            <thead>
+                <tr><th>Patient</th><th>Date</th><th>Time</th><th>Actions</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <h3>Patients</h3>
+        <ul id="doctorPatients"></ul>
+        <div class="reminder">
+            <h3>Reminders</h3>
+            <input type="text" id="reminderInput" placeholder="Add reminder">
+            <button onclick="addReminder()">Add</button>
+            <ul id="reminderList"></ul>
+        </div>
+    </div>
+    <div id="patientSection" class="section">
+        <h3>Upcoming Appointments</h3>
+        <table id="patientAppointments">
+            <thead>
+                <tr><th>Doctor</th><th>Date</th><th>Time</th></tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="preferences">
+            <h3>Preferences</h3>
+            <input type="text" id="preferenceInput" placeholder="Set preference">
+            <button onclick="addPreference()">Save</button>
+            <ul id="preferenceList"></ul>
+        </div>
+    </div>
+</div>
+<script>
+    // Simulate user type after login (change to 'doctor' or 'patient')
+    let userType = localStorage.getItem('userType') || 'doctor'; // or 'patient'
+
+    // Dummy data
+    const appointments = [
+        { doctor: "Dr. Wafula", patient: "John Doe", date: "2024-06-20", time: "10:00 AM" },
+        { doctor: "Dr. Wale", patient: "Jane Mokami", date: "2024-06-21", time: "2:00 PM" }
+    ];
+    const patients = ["John Doe", "Jane Mokami"];
+    const reminders = [];
+    const preferences = [];
+
+    function renderDashboard() {
+        document.getElementById('userTypeLabel').textContent = userType.charAt(0).toUpperCase() + userType.slice(1);
+        document.getElementById('dashboardTitle').textContent = userType === 'doctor' ? "Doctor Dashboard" : "Patient Dashboard";
+        document.getElementById('doctorSection').classList.toggle('active', userType === 'doctor');
+        document.getElementById('patientSection').classList.toggle('active', userType === 'patient');
+        renderNav();
+        if (userType === 'doctor') {
+            renderDoctorAppointments();
+            renderDoctorPatients();
+            renderReminders();
+        } else {
+            renderPatientAppointments();
+            renderPreferences();
+        }
+    }
+
+    function renderNav() {
+        const nav = document.getElementById('dashboardNav');
+        nav.innerHTML = '';
+        const doctorBtn = document.createElement('button');
+        doctorBtn.textContent = "Doctor";
+        doctorBtn.className = userType === 'doctor' ? 'active' : '';
+        doctorBtn.onclick = () => { userType = 'doctor'; localStorage.setItem('userType', 'doctor'); renderDashboard(); };
+        nav.appendChild(doctorBtn);
+
+        const patientBtn = document.createElement('button');
+        patientBtn.textContent = "Patient";
+        patientBtn.className = userType === 'patient' ? 'active' : '';
+        patientBtn.onclick = () => { userType = 'patient'; localStorage.setItem('userType', 'patient'); renderDashboard(); };
+        nav.appendChild(patientBtn);
+    }
+
+    function renderDoctorAppointments() {
+        const tbody = document.getElementById('doctorAppointments').querySelector('tbody');
+        tbody.innerHTML = '';
+        appointments.filter(a => a.doctor === "Dr. Smith").forEach((a, i) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${a.patient}</td><td>${a.date}</td><td>${a.time}</td>
+                <td><button onclick="cancelAppointment(${i})">Cancel</button></td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderDoctorPatients() {
+        const ul = document.getElementById('doctorPatients');
+        ul.innerHTML = '';
+        patients.forEach(p => {
+            const li = document.createElement('li');
+            li.textContent = p;
+            ul.appendChild(li);
+        });
+    }
+
+    function renderReminders() {
+        const ul = document.getElementById('reminderList');
+        ul.innerHTML = '';
+        reminders.forEach((r, i) => {
+            const li = document.createElement('li');
+            li.textContent = r;
+            li.innerHTML += ` <button onclick="removeReminder(${i})">Remove</button>`;
+            ul.appendChild(li);
+        });
+    }
+
+    function renderPatientAppointments() {
+        const tbody = document.getElementById('patientAppointments').querySelector('tbody');
+        tbody.innerHTML = '';
+        appointments.filter(a => a.patient === "John Doe").forEach(a => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${a.doctor}</td><td>${a.date}</td><td>${a.time}</td>`;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function renderPreferences() {
+        const ul = document.getElementById('preferenceList');
+        ul.innerHTML = '';
+        preferences.forEach((p, i) => {
+            const li = document.createElement('li');
+            li.textContent = p;
+            li.innerHTML += ` <button onclick="removePreference(${i})">Remove</button>`;
+            ul.appendChild(li);
+        });
+    }
+
+    function cancelAppointment(index) {
+        appointments.splice(index, 1);
+        renderDoctorAppointments();
+    }
+
+    function addReminder() {
+        const input = document.getElementById('reminderInput');
+        if (input.value.trim()) {
+            reminders.push(input.value.trim());
+            input.value = '';
+            renderReminders();
+        }
+    }
+
+    function removeReminder(index) {
+        reminders.splice(index, 1);
+        renderReminders();
+    }
+
+    function addPreference() {
+        const input = document.getElementById('preferenceInput');
+        if (input.value.trim()) {
+            preferences.push(input.value.trim());
+            input.value = '';
+            renderPreferences();
+        }
+    }
+
+    function removePreference(index) {
+        preferences.splice(index, 1);
+        renderPreferences();
+    }
+
+    // Initial render
+    renderDashboard();
+</script>
+</body>
+</html>
